@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
 }
 
 class _HomePageBody extends StatelessWidget {
-  const _HomePageBody({super.key});
+  const _HomePageBody();
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +44,8 @@ class _HomePageBody extends StatelessWidget {
 
     //TODO: Temporal - Leer la base de datos.
     final tempScan = ScanModel(valor: 'http://google.com');
+    //DBProvider.db.nuevoScan(tempScan);
+    DBProvider.db.deleteAllScans();
     DBProvider.db.getAllScans().then(print);
 
     switch (currentIndex) {
