@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qr_reader/model/scan_model.dart';
 
 import 'package:qr_reader/pages/direcciones_page.dart';
 import 'package:qr_reader/pages/mapas_page.dart';
+import 'package:qr_reader/providers/db_provider.dart';
 import 'package:qr_reader/providers/ui_provider.dart';
 
 import 'package:qr_reader/widgets/custom_navigationbar.dart';
@@ -16,13 +18,13 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text('Historial'),
+        title: const Text('Historial'),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.delete_forever))
+          IconButton(onPressed: () {}, icon: const Icon(Icons.delete_forever))
         ],
       ),
-      bottomNavigationBar: CustomNavigationbar(),
-      floatingActionButton: ScanButton(),
+      bottomNavigationBar: const CustomNavigationbar(),
+      floatingActionButton: const ScanButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: const _HomePageBody(),
     );
@@ -35,19 +37,22 @@ class _HomePageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //Obtener el selected menu opt.
-
     final uiProvider = Provider.of<UiProvider>(context);
 
     //Cambiar la pagina respectiva.
     final currentIndex = uiProvider.selectedMenuOpt;
 
+    //TODO: Temporal - Leer la base de datos.
+    final tempScan = ScanModel(valor: 'http://google.com');
+    DBProvider.db.getAllScans().then(print);
+
     switch (currentIndex) {
       case 0:
-        return MapasPage();
+        return const MapasPage();
       case 1:
-        return DireccionesPage();
+        return const DireccionesPage();
       default:
-        return MapasPage();
+        return const MapasPage();
     }
   }
 }
