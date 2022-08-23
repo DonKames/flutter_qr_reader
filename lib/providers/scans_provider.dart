@@ -13,7 +13,10 @@ class ScansProvider extends ChangeNotifier {
 
     nuevoScan.id = id;
 
-    scans.add(nuevoScan);
+    if (tipoSeleccionado == nuevoScan.tipo) {
+      scans.add(nuevoScan);
+      notifyListeners();
+    }
     notifyListeners();
   }
 
