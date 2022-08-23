@@ -23,9 +23,6 @@ class DBProvider {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     final path = join(documentsDirectory.path, 'ScansDB.db');
 
-    print(path);
-    print(documentsDirectory);
-
     //Crear base de datos
     return await openDatabase(
       path,
@@ -61,7 +58,6 @@ class DBProvider {
   Future<int> nuevoScan(ScanModel nuevoScan) async {
     final db = await database;
     final res = await db.insert('Scans', nuevoScan.toJson());
-    print(res);
     return res;
   }
 

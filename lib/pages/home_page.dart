@@ -4,7 +4,6 @@ import 'package:qr_reader/model/scan_model.dart';
 
 import 'package:qr_reader/pages/direcciones_page.dart';
 import 'package:qr_reader/pages/mapas_page.dart';
-import 'package:qr_reader/providers/db_provider.dart';
 import 'package:qr_reader/providers/scans_provider.dart';
 import 'package:qr_reader/providers/ui_provider.dart';
 
@@ -21,7 +20,12 @@ class HomePage extends StatelessWidget {
         elevation: 0,
         title: const Text('Historial'),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.delete_forever))
+          IconButton(
+              onPressed: () {
+                Provider.of<ScansProvider>(context, listen: false)
+                    .deleteAllScans();
+              },
+              icon: const Icon(Icons.delete_forever))
         ],
       ),
       bottomNavigationBar: const CustomNavigationbar(),
